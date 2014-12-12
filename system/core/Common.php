@@ -554,6 +554,12 @@ if ( ! function_exists('html_escape'))
 		}
 	}
 }
-
+function pr($arr, $exit=0){
+    echo "<pre>";
+    print_r($arr);
+    echo "</pre>";
+    if($exit)
+        exit;
+}
 /* End of file Common.php */
 /* Location: ./system/core/Common.php */

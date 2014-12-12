@@ -42,16 +42,8 @@ class user_m extends CI_Model {
         );
     }
 
-    function  create_new_user( $userData ) {
-      $data['firstName'] = $userData['firstName'];
-      $data['lastName'] = $userData['lastName'];
-     // $data['teamId'] = (int) $userData['teamId'];
-      $data['isAdmin'] = (int) $userData['isAdmin'];
-      //$data['avatar'] = $this->getAvatar();
-      $data['email'] = $userData['email'];
-     // $data['tagline'] = "Click here to edit tagline.";
-      $data['password'] = sha1($userData['password1']);
-
+    function  create_new_user( $data ) {
+      
       return $this->db->insert('user',$data);
     }
 

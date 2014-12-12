@@ -23,7 +23,7 @@
         <button type="submit" name="submit" class="btn btn-info btn-block">Sign in</button>
 
         </form>
-          <a data-toggle="modal" href="#myModal"><i class="icon-user"></i> New User ?</a>
+          <a data-toggle="modal" href="<?php echo $this->baseurl;?>/login/new_user"><i class="icon-user"></i> New User ?</a>
 
       </div>
     </div>

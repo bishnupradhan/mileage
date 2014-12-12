@@ -42,8 +42,23 @@ class login extends CI_Controller {
       $this->index();
     }
 
+    function new_user($show_error=null){
+        $data['error'] = $show_error;
+
+        $this->load->helper('form');
+        $this->load->view('register',$data); // For showing the form with error data
+    }
+    
     function register() {
-        $userInfo = $this->input->post(null,true);
+        $userInfo = $_POST;
+        if($userInfo["password"]!=$userInfo["cpassword"])
+            exit("Password and confirm password has mismatched");
+        else{
+            unset($userInfo["cpassword"]);
+            $userInfo["password"] = sha1($userInfo["password"]);// For password encrypting
+        }
+        $userInfo["add_date"]=  date("Y-m-d h:i:s");
+        $userInfo["ip"]=$_SERVER["HTTP_HOST"];
 
         if( count($userInfo) ) {
             $this->load->model('user_m');
@@ -51,9 +66,15 @@ class login extends CI_Controller {
         }
 
         if ( isset($saved) && $saved ) {
-            echo "success";
-        }
+            redirect("login"); // after successing
+        }        
+        
     }
 
-
+    function user_listing(){
+        /*if(!$this->session->userdata('isAdmin'))
+            exit("Admin Authorisation Required");*/
+        $userlists = $this->CI_pagination->pagination("user");
+        pr($userlists);
+    }
 }
